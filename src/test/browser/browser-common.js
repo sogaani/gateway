@@ -9,8 +9,10 @@ const path = require('path');
 
 const VIEWPORTSIZE = {width: 1280, height: 800};
 const TEST_OUTPUT_FOLDER = path.join(__dirname, '../../../browser-test-output');
-const SCREEN_SHOTS_FOLDER = path.join(__dirname, './screen-shots');
+const SCREEN_SHOTS_FOLDER =
+  path.join(__dirname, '../../../browser-test-screenshots');
 const DIFF_IMAGES_FOLDER = path.join(__dirname, '../../../browser-test-diff');
+const compareImageDisabled = !fs.existsSync(SCREEN_SHOTS_FOLDER);
 
 const options = {
   desiredCapabilities: {
@@ -81,7 +83,7 @@ beforeEach(async () => {
 });
 
 afterEach(async () => {
-  if (process.env.DISABLE_SCREENSHOT_COMPARISON) {
+  if (compareImageDisabled) {
     return;
   }
   if (!fs.existsSync(DIFF_IMAGES_FOLDER)) {
