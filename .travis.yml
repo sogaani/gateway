@@ -31,6 +31,7 @@ env:
     - MOZIOT_HOME=/home/travis/.mozilla-iot/test
 
 script:
+  - ./src/test/take-prev-screenshots.sh
   - node ./node_modules/webpack/bin/webpack.js
   - npm run lint
   - ./tools/make-self-signed-cert.sh
